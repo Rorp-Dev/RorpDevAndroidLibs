@@ -4,6 +4,7 @@ Library for Android project development using Kotlin language.
 Here below list of how to use libraries for Android development, the majority being actively maintained.
 
 [1. BaseActivity](https://github.com/Rorp-Dev/RorpDevAndroidLibs#BaseActivity)
+
 [2. Internet indicator](https://github.com/Rorp-Dev/RorpDevAndroidLibs#NetworkCallBack)
 ### BaseActivity
 Your activity should have viewmodel otherwise you can use **__BaseViewModel::class.java__**
