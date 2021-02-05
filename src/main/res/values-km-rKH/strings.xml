@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">កូតលីនឡាប</string>
+    <string name="more">ច្រើនទៀត</string>
+    <string name="ok">យល់ព្រម</string>
+    <string name="setting">ការកំណត់</string>
+    <string name="cancel">បោះបង់</string>
+    <string name="close">បិទ</string>
+    <string name="add">បន្ថែម</string>
+    <string name="delete">លុប</string>
+    <string name="night">យប់</string>
+    <string name="clear">សំអាត</string>
+    <string name="change_language">ប្ដូរភាសា</string>
+</resources>

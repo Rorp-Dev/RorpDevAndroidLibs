@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_internet_status"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        tools:ignore="UselessParent">
+        <TextView
+            android:id="@+id/tv_internet_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            tools:hint="message"
+            android:textSize="11dp"
+            android:textColor="@color/color_000000"
+            android:gravity="center"
+            tools:ignore="SpUsage" />
+    </LinearLayout>
+
+</FrameLayout>
