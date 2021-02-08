@@ -29,10 +29,8 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures {
-        // Determines whether to support Data Binding.
-        // Note that the dataBinding.enabled property is now deprecated.
-        dataBinding true
+    dataBinding {
+        enabled = true
     }
 }
 

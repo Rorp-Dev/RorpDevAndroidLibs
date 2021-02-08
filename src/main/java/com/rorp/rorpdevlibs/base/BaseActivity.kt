@@ -23,7 +23,7 @@ import com.rorp.rorpdevlibs.network.NetworkCallback
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(protected val mViewModelClass: Class<VM>): AppCompatActivity() {
 
     val mBaseBinding by lazy {
-        DataBindingUtil.setContentView(this, getLayoutRes()) as DB
+        DataBindingUtil.setContentView(this, setLayoutRes()) as DB
     }
 
     val mBaseViewModel by lazy{
@@ -36,7 +36,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(protected 
      * return layoutId (eg: return R.layout.activity_main)
      */
     @LayoutRes
-    abstract fun getLayoutRes() : Int
+    abstract fun setLayoutRes() : Int
 
     /**
      *  Must set viewModel to mBaseBinding: mBaseBinding.viewModel = mViewModel
@@ -47,7 +47,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>(protected 
         </data>
      *
      */
-    abstract fun initViewModel(viewModel : VM)
+    abstract fun setViewModel(viewModel : VM)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

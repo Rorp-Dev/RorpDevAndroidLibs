@@ -1,4 +1,4 @@
-package com.rorp.rorpdevlibs.encryption
+package com.rorp.rorpdevlibs.constant
 
 /*
       ____                _              _
@@ -15,4 +15,5 @@ object Constants {
     const val TRANSFORMATION    = "AES/GCM/NoPadding"
     const val ANDROID_KEY_STORE = "AndroidKeyStore"
     const val USERNAME          = "USERNAME"
+    const val SHARED_PREF       = "SHARED_PREF"
 }
