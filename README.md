@@ -8,8 +8,10 @@ Here below list of how to use libraries for Android development, the majority be
 [2. Internet indicator](https://github.com/Rorp-Dev/RorpDevAndroidLibs#NetworkCallBack)
 ### BaseActivity
 Your activity should have viewmodel otherwise you can use **__BaseViewModel::class.java__**
-⋅⋅* Extends from BaseActivity
-⋅⋅* Override method
+
+- Extends from BaseActivity
+- Override method
+
 ```
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class.java) {
   super.onCreate(savedInstanceState)
