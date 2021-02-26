@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet</item>
+    </style>
 
-    <style name="window_animation_fade_in_out">
-        <item name="android:windowEnterAnimation">@anim/fade_in</item>
-        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    <style name="font_style_normal" parent="regular_text_form">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="regular_text_form">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/atlantic</item>
+        <item name="android:textSize">@dimen/textSizeNormal</item>
     </style>
 </resources>

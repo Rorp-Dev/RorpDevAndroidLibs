@@ -1,4 +1,4 @@
-package com.rorp.rorpdevlibs.network
+package com.rorp.rorpdevlibs.network.connection
 
 import android.content.Context
 import android.net.ConnectivityManager
