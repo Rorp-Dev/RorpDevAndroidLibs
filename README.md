@@ -4,11 +4,17 @@ Library for Android project development using Kotlin language. A base code which
 Here below list of how to use libraries for Android development, the majority being actively maintained.
 
 [1. BaseActivity](https://github.com/Rorp-Dev/RorpDevAndroidLibs#BaseActivity)
+
 [2. BaseViewModel](https://github.com/Rorp-Dev/RorpDevAndroidLibs#BaseViewModel)
+
 [3. Internet indicator](https://github.com/Rorp-Dev/RorpDevAndroidLibs#NetworkCallBack)
+
 [4. Biometric](https://github.com/Rorp-Dev/RorpDevAndroidLibs#Biometric)
+
 [5. BaseViewGroup](https://github.com/Rorp-Dev/RorpDevAndroidLibs#BaseViewGroup)
+
 [6. BaseFragment](https://github.com/Rorp-Dev/RorpDevAndroidLibs#BaseFragment)
+
 [7. RetrofitUtils](https://github.com/Rorp-Dev/RorpDevAndroidLibs#RetrofitUtils)
 
 ### BaseActivity
