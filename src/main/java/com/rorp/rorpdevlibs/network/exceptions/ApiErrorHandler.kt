@@ -6,7 +6,7 @@ import java.net.SocketTimeoutException
 
 /**
  * Trace exceptions(api call or parse data or connection errors) &
- * depending on what exception returns [ApiErrorf]
+ * depending on what exception returns [ApiError]
  *
  * */
 fun traceErrorException(throwable: Throwable?): ApiError {
@@ -59,11 +59,11 @@ fun traceErrorException(throwable: Throwable?): ApiError {
         }
 
         is SocketTimeoutException -> {
-            ApiError(throwable.message, ApiError.ErrorStatus.TIMEOUT)
+            ApiError(throwable.message, 408, ApiError.ErrorStatus.TIMEOUT)
         }
 
         is IOException -> {
-            ApiError(throwable.message, ApiError.ErrorStatus.NO_CONNECTION)
+            ApiError(throwable.message, 499, ApiError.ErrorStatus.NO_CONNECTION)
         }
 
         else -> ApiError(UNKNOWN_ERROR_MESSAGE, 0, ApiError.ErrorStatus.UNKNOWN_ERROR)

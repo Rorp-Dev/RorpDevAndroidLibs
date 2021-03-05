@@ -10,6 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
+/*
+     ____                 _____                                     _
+    | __ )  __ _ ___  ___|  ___| __ __ _  __ _ _ __ ___   ___ _ __ | |_
+    |  _ \ / _` / __|/ _ \ |_ | '__/ _` |/ _` | '_ ` _ \ / _ \ '_ \| __|
+    | |_) | (_| \__ \  __/  _|| | | (_| | (_| | | | | | |  __/ | | | |_
+    |____/ \__,_|___/\___|_|  |_|  \__,_|\__, |_| |_| |_|\___|_| |_|\__|
+                                         |___/
+ */
 abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment(),
     BaseViewGroup<V, B>,
     ToolbarManager,
@@ -37,23 +45,27 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (toolBarId > 0) {
-            toolbar = view.findViewById(toolBarId)
-            (activity as AppCompatActivity).setSupportActionBar(toolbar)
-            toolbar?.title = title
+        try {
+            if (toolBarId > 0) {
+                toolbar = view.findViewById(toolBarId)
+                (activity as AppCompatActivity).setSupportActionBar(toolbar)
+                toolbar?.title = title
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            toolbar?.visibility = View.GONE
         }
 
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        viewModel.progressBar = progressBar
         viewModel.commonMessage.observe(viewLifecycleOwner, Observer {
             it?.let { message ->
                 showMessage(message)
             }
         })
-        viewModel.hideProgressBar()
+        viewModel.hideLoading()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,7 +79,7 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : Fragment()
 
     override fun onDestroyView() {
         super.onDestroyView()
-        arguments?.putBoolean(DATA_LOADED, viewModel.dataLoaded.get() == true)
+        arguments?.putBoolean(DATA_LOADED, viewModel.dataLoaded.value == true)
     }
 
     override fun onDestroy() {

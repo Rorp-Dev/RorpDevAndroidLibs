@@ -12,7 +12,7 @@ import com.rorp.rorpdevlibs.biometric.crypto.EncryptionMode
 
 abstract class BiometricAuthenticator(
     activity: FragmentActivity,
-    protected val listener: Listener
+    protected val listener: Listener,
 ) {
 
     var showNegativeButton = false
@@ -20,6 +20,7 @@ abstract class BiometricAuthenticator(
     var isStrongAuthenticationEnabled = true
     var isWeakAuthenticationEnabled = false
     var showAuthenticationConfirmation = true
+    var biometricListener : BiometricListener? = null
 
     /** Handle using biometrics + cryptography to encrypt/decrypt data securely */
     protected val cryptographyManager = CryptographyManager.instance()
@@ -30,6 +31,7 @@ abstract class BiometricAuthenticator(
     private val authenticationCallback = object : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
             listener.onNewMessage("Authentication succeeded")
+            biometricListener?.onAuthenticationSucceeded(result)
 
             val type = result.authenticationType
             val cryptoObject = result.cryptoObject
@@ -50,10 +52,12 @@ abstract class BiometricAuthenticator(
 
         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
             listener.onNewMessage("Authentication error[${getBiometricError(errorCode)}] - $errString")
+            biometricListener?.onAuthenticationError(errorCode, errString)
         }
 
         override fun onAuthenticationFailed() {
             listener.onNewMessage("Authentication failed - Biometric is valid but not recognized")
+            biometricListener?.onAuthenticationFailed()
         }
     }
 
@@ -106,6 +110,12 @@ abstract class BiometricAuthenticator(
 
     interface Listener {
         fun onNewMessage(message: String)
+    }
+
+    interface BiometricListener {
+        fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult)
+        fun onAuthenticationError(errorCode: Int, errString: CharSequence)
+        fun onAuthenticationFailed()
     }
 
     companion object {

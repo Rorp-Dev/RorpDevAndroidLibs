@@ -1,6 +1,5 @@
 package com.rorp.rorpdevlibs.base
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -21,10 +20,9 @@ import kotlinx.coroutines.cancel
  * @since 2021.02.05
  */
 open class BaseViewModel() : ViewModel(){
-    private val showProgress: ObservableField<Boolean> = ObservableField()
-    private val networkError: ObservableField<Boolean> = ObservableField()
+    val loadingMLD: MutableLiveData<Boolean> = MutableLiveData()
     val commonMessage: MutableLiveData<String> = MutableLiveData()
-    val dataLoaded: ObservableField<Boolean> = ObservableField()
+    val dataLoaded: MutableLiveData<Boolean> = MutableLiveData()
 
     val scope = CoroutineScope(
         Job() + Dispatchers.Main
@@ -37,29 +35,14 @@ open class BaseViewModel() : ViewModel(){
     }
 
     init {
-        showProgress.set(false)
-        networkError.set(false)
+        loadingMLD.value = false
     }
 
-    open fun tryAgainFunction() {
-
+    open fun showLoading() {
+        loadingMLD.value = true
     }
 
-    open fun showProgressBar() {
-        showProgress.set(true)
-    }
-
-    open fun hideProgressBar() {
-        showProgress.set(false)
-
-    }
-
-    open fun showConnectionError() {
-        hideProgressBar()
-        networkError.set(true)
-    }
-
-    open fun hideConnectionError() {
-        networkError.set(false)
+    open fun hideLoading() {
+        loadingMLD.value = false
     }
 }

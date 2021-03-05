@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricPrompt
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.rorp.rorpdevlibs.biometric.BiometricAuthenticator
 import com.rorp.rorpdevlibs.network.connection.NetworkCallback
+import com.rorp.rorpdevlibs.util.dialog.LoadingDialog
 import com.rorp.rorpdevlibs.util.extensions.TransitionAnimation
 import com.rorp.rorpdevlibs.util.extensions.setCustomAnimation
+import java.util.*
+import kotlin.concurrent.schedule
 
 
 /*
@@ -37,6 +42,8 @@ abstract class BaseActivity<V : BaseViewModel, B : ViewDataBinding>: AppCompatAc
     private val backCallback: MutableLiveData<OnBackPressedListener?> = MutableLiveData()
     private var lastFragmentTag = ""
 
+    private var loadingDialog: LoadingDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
@@ -54,18 +61,43 @@ abstract class BaseActivity<V : BaseViewModel, B : ViewDataBinding>: AppCompatAc
                     }
                 }
             })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-            biometricAuthenticator =
-                BiometricAuthenticator.instance(this, object : BiometricAuthenticator.Listener {
-                    override fun onNewMessage(message: String) {
-                        Toast.makeText(this@BaseActivity, message, Toast.LENGTH_LONG).show()
-                    }
-                })
+        // biometric
+        biometricAuthenticator =
+            BiometricAuthenticator.instance(this, object : BiometricAuthenticator.Listener {
+                override fun onNewMessage(message: String) {
+                    // TODO: Log your message
+                }
+            })
 
-            // show negative/cancel
-            biometricAuthenticator.showNegativeButton = true
+        biometricAuthenticator.biometricListener = object : BiometricAuthenticator.BiometricListener{
+            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                Toast.makeText(this@BaseActivity, "FUCK SUCCEED", Toast.LENGTH_LONG).show()
+            }
 
-        } catch (e: Exception) {}
+            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                Toast.makeText(this@BaseActivity, "FUCK ERROR", Toast.LENGTH_LONG).show()
+            }
+
+            override fun onAuthenticationFailed() {
+                Toast.makeText(this@BaseActivity, "FUCK FAILED", Toast.LENGTH_LONG).show()
+            }
+        }
+
+        // show negative/cancel
+        biometricAuthenticator.showNegativeButton = true
+
+        // loading observe
+        viewModel.loadingMLD.observe(this, Observer {
+            if(it){
+                showLoading()
+            }else {
+                hideLoading()
+            }
+        })
     }
 
     override fun onBackPressed() {
@@ -161,6 +193,19 @@ abstract class BaseActivity<V : BaseViewModel, B : ViewDataBinding>: AppCompatAc
         }
 
         lastFragmentTag = backStackTag
+    }
+
+    private fun showLoading() {
+        loadingDialog = LoadingDialog(this, viewModel.scope)
+        loadingDialog!!.show()
+    }
+
+    private fun hideLoading() {
+        if(loadingDialog != null){
+            Timer().schedule(1000){
+                loadingDialog!!.hide()
+            }
+        }
     }
 
     /**

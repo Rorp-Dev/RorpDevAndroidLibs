@@ -1,5 +1,7 @@
 package com.rorp.rorpdevlibs.network.exceptions
 
+import com.squareup.moshi.JsonClass
+
 private const val BAD_REQUEST_ERROR_MESSAGE = "Bad Request!"
 private const val FORBIDDEN_ERROR_MESSAGE = "Forbidden!"
 private const val NOT_FOUND_ERROR_MESSAGE = "Not Found!"
@@ -15,6 +17,7 @@ const val UNKNOWN_ERROR_MESSAGE = "Unknown Error!"
  * Designed to show different types of errors through error status & message
  *
  * */
+@JsonClass(generateAdapter = true)
 data class ApiError(val message: String?, val code: Int?, var errorStatus: ErrorStatus) {
 
     constructor(message: String?, errorStatus: ErrorStatus) : this(message, null, errorStatus)
