@@ -177,6 +177,7 @@ All fragments extend this abstract class.
 ### RetrofitUtils
 We use **Retrofit** which is API interfaces are turned into callable objects and **Moshi** is a great JSON library for Kotlin. It makes it easy to parse JSON into objects.
 
+### License
 ```
 MIT License
 
