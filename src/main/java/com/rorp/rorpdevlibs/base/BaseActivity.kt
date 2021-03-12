@@ -75,15 +75,15 @@ abstract class BaseActivity<V : BaseViewModel, B : ViewDataBinding>: AppCompatAc
 
         biometricAuthenticator.biometricListener = object : BiometricAuthenticator.BiometricListener{
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                Toast.makeText(this@BaseActivity, "FUCK SUCCEED", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BaseActivity, "SUCCEED", Toast.LENGTH_LONG).show()
             }
 
             override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                Toast.makeText(this@BaseActivity, "FUCK ERROR", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BaseActivity, "ERROR", Toast.LENGTH_LONG).show()
             }
 
             override fun onAuthenticationFailed() {
-                Toast.makeText(this@BaseActivity, "FUCK FAILED", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@BaseActivity, "FAILED", Toast.LENGTH_LONG).show()
             }
         }
 

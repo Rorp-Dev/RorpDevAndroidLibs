@@ -14,4 +14,13 @@
         <item name="android:fontFamily" tools:targetApi="jelly_bean">@font/atlantic</item>
         <item name="android:textSize">@dimen/textSizeNormal</item>
     </style>
+
+    <declare-styleable name="ProgressButton">
+        <attr name="android:text" format="string" />
+        <attr name="android:hint" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ProgressButton_text">
+        <attr name="android:text" format="string" />
+    </declare-styleable>
 </resources>
